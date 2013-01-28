@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'mithril/mithril'
+require 'mithril'
 
-puts Mithril
+puts "Greetings, programs!"
