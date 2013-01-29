@@ -1,6 +1,6 @@
 # lib/mithril/controllers/mixins/actions_base.rb
 
-require 'mithril/controllers/mixins'
+require 'mithril/controllers/mixins/action_mixin'
 
 module Mithril::Controllers::Mixins
   # Core functions for implementing a command+args response model. ActionsBase
@@ -10,7 +10,7 @@ module Mithril::Controllers::Mixins
   # @see Mithril::Mixin
   # @see Mithril::Controllers::Mixins::ActionsBase::ClassMethods
   module ActionsBase
-    extend ActionMixin
+    extend Mithril::Controllers::Mixins::ActionMixin
     
     # These methods get extended into the class of the controller through the
     # magic of Mixin.
