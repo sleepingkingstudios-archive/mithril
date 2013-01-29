@@ -4,56 +4,62 @@ require 'spec_helper'
 require 'mithril/mixin'
 
 describe Mithril::Mixin do
-  before :each do
-    foo = Module.new
-    foo.send :extend, Mithril::Mixin
-    foo.send :define_method, :foo do; end
-    
-    Mithril::Mock.const_set :Foo, foo
-    
-    foo_m = Module.new
-    foo_m.send :define_method, :foo_m do; end
-    
-    Mithril::Mock::Foo.const_set :ClassMethods, foo_m
-    
-    bar = Module.new
-    bar.send :extend, Mithril::Mixin
-    bar.send :mixin, Mithril::Mock::Foo
-    bar.send :define_method, :bar do; end
-    
-    Mithril::Mock.const_set :Bar, bar
-    
-    bar_m = Module.new
-    bar_m.send :define_method, :bar_m do; end
-    
-    Mithril::Mock::Bar.const_set :ClassMethods, bar_m
-    
-    baz = Class.new
-    baz.send :extend, Mithril::Mixin
-    baz.send :mixin, Mithril::Mock::Bar
-    
-    Mithril::Mock.const_set :Baz, baz
-  end # before each
+  let :ancestor_instance_method do FactoryGirl.generate(:action_key); end
+  let :ancestor_class_method do FactoryGirl.generate(:action_key); end
+  let :ancestor_module do
+    mod = Module.new
+    mod.send :extend, Mithril::Mixin
+    mod.send :define_method, ancestor_instance_method do; end
+    mod.const_set :ClassMethods, Module.new
+    mod::ClassMethods.send :define_method, ancestor_class_method do; end
+    mod
+  end # let
   
-  after :each do
-    Mithril::Mock.send :remove_const, :Foo
-    Mithril::Mock.send :remove_const, :Bar
-    Mithril::Mock.send :remove_const, :Baz
-  end # after each
+  let :parent_instance_method do FactoryGirl.generate(:action_key); end
+  let :parent_class_method do FactoryGirl.generate(:action_key); end
+  let :parent_module do
+    mod = Module.new
+    mod.send :extend, Mithril::Mixin
+    mod.send :mixin, ancestor_module
+    mod.send :define_method, parent_instance_method do; end
+    mod.const_set :ClassMethods, Module.new
+    mod::ClassMethods.send :define_method, parent_class_method do; end
+    mod
+  end # let
   
-  let :described_class do Mithril::Mock::Baz; end
-  let :instance do described_class.new; end
+  context "with a direct mixin" do
+    let :described_class do
+      klass = Class.new.extend super()
+      klass.send :mixin, ancestor_module
+      klass
+    end # let
+    let :instance do described_class.new; end
+    
+    describe "instance methods are mixed in" do
+      specify { expect(instance).to respond_to ancestor_instance_method }
+    end # describe
+    
+    describe "class method are mixed in" do
+      specify { expect(described_class).to respond_to ancestor_class_method }
+    end # describe
+  end # context
   
-  it { expect(Mithril::Mock::Bar).to respond_to :foo_m }
-  it { expect {
-    module Mithril::Mock::Bar
-      foo_m
-    end # module
-  }.not_to raise_error }
-  
-  it { expect(described_class).to respond_to :foo_m }
-  it { expect(instance).to respond_to :foo }
-  
-  it { expect(described_class).to respond_to :bar_m }
-  it { expect(instance).to respond_to :bar }
+  context "with a cascading mixin" do
+    let :described_class do
+      klass = Class.new.extend Mithril::Mixin
+      klass.send :mixin, parent_module
+      klass
+    end # let
+    let :instance do described_class.new; end
+    
+    describe "instance methods are mixed in" do
+      specify { expect(instance).to respond_to ancestor_instance_method }
+      specify { expect(instance).to respond_to parent_instance_method }
+    end # describe
+    
+    describe "class method are mixed in" do
+      specify { expect(described_class).to respond_to ancestor_class_method }
+      specify { expect(described_class).to respond_to parent_class_method }
+    end # describe
+  end # context
 end # describe

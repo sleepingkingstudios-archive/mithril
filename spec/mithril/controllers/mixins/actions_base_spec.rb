@@ -1,0 +1,17 @@
+# spec/mithril/controllers/mixins/actions_base_spec.rb
+
+require 'spec_helper'
+require 'mithril/controllers/mixins/actions_base_helper'
+
+require 'mithril/controllers/mixins/actions_base'
+
+describe Mithril::Controllers::Mixins::ActionsBase do
+  let :described_class do
+    klass = Class.new.extend Mithril::Controllers::Mixins::ActionMixin
+    klass.send :mixin, super()
+    klass
+  end # let
+  let :instance do described_class.new; end
+  
+  it_behaves_like Mithril::Controllers::Mixins::ActionsBase
+end # describe

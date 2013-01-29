@@ -1,2 +1,3 @@
 # symbolic links
-controllers
+/controllers
+/mixins

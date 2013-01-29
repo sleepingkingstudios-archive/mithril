@@ -16,5 +16,6 @@ Gem::Specification.new do |mithril|
   mithril.executables  << 'mithril'
   
   mithril.add_development_dependency 'rspec', '~> 2.12'
+  mithril.add_development_dependency 'factory_girl', '~> 4.2'
   mithril.test_files   = Dir.glob("spec/**/*.rb")
 end # gem specification
