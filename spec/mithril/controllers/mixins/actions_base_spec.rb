@@ -4,10 +4,11 @@ require 'spec_helper'
 require 'mithril/controllers/mixins/actions_base_helper'
 
 require 'mithril/controllers/mixins/actions_base'
+require 'mithril/controllers/mixins/mixin_with_actions'
 
 describe Mithril::Controllers::Mixins::ActionsBase do
   let :described_class do
-    klass = Class.new.extend Mithril::Controllers::Mixins::ActionMixin
+    klass = Class.new.extend Mithril::Controllers::Mixins::MixinWithActions
     klass.send :mixin, super()
     klass
   end # let

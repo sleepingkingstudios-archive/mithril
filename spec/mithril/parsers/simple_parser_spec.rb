@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 
-require 'mithril/controllers/mixins/action_mixin'
 require 'mithril/controllers/mixins/actions_base'
 require 'mithril/parsers/simple_parser'
 

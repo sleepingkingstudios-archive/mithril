@@ -1,10 +1,10 @@
-# lib/mithril/controllers/mixins/action_mixin.rb
+# lib/mithril/controllers/mixins/mixin_with_actions.rb
 
 require 'mithril/controllers/mixins'
 require 'mithril/mixin'
 
 module Mithril::Controllers::Mixins
-  module ActionMixin
+  module MixinWithActions
     include Mithril::Mixin
   
   private

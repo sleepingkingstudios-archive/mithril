@@ -1,3 +1,7 @@
+#### Version 0.0.4
+  * Renamed ActionMixin to MixinWithActions for clarity
+  * Improved specs for Mixin, MixinWithActions
+
 #### Version 0.0.3
   * Implemented Mithril::Parsers::SimpleParser
 
