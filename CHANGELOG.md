@@ -1,3 +1,8 @@
+## Development Versions
+
+#### Version 0.1.0
+  * Implemented AbstractController
+
 #### Version 0.0.4
   * Renamed ActionMixin to MixinWithActions for clarity
   * Improved specs for Mixin, MixinWithActions

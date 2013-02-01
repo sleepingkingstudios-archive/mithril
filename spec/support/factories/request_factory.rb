@@ -1,4 +1,4 @@
-# spec/support/factories/user_factory.rb
+# spec/support/factories/request_factory.rb
 
 require 'factory_girl'
 
