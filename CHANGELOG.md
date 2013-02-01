@@ -1,5 +1,8 @@
 ## Development Versions
 
+#### Version 0.1.1
+  * Added logger property to Mithril module
+
 #### Version 0.1.0
   * Implemented AbstractController
 
