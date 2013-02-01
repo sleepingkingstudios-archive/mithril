@@ -12,7 +12,7 @@ Gem::Specification.new do |mithril|
   mithril.homepage     = 'http://sleepingkingstudios.com'
   
   mithril.require_path = 'lib'
-  mithril.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
+  mithril.files        = Dir["{lib}/**/*.rb", "spec/**/*.rb", "bin/*", "LICENSE", "*.md"]
   mithril.executables  << 'mithril'
   
   mithril.add_development_dependency 'rspec', '~> 2.12'

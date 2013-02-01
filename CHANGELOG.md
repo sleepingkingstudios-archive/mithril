@@ -1,5 +1,8 @@
 ## Development Versions
 
+#### Version 0.1.2
+  * Added HelpActions mixin
+
 #### Version 0.1.1
   * Added logger property to Mithril module
 
