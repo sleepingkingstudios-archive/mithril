@@ -7,7 +7,8 @@ GIT
 PATH
   remote: .
   specs:
-    mithril (0.1.2)
+    mithril (0.2.0)
+    mithril-specs (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -34,5 +35,6 @@ PLATFORMS
 DEPENDENCIES
   factory_girl (~> 4.2)
   mithril!
+  mithril-specs!
   rspec (~> 2.12)
   rspec-core!

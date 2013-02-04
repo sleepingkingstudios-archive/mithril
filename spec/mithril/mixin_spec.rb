@@ -1,6 +1,6 @@
 # spec/mithril/mixin_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 require 'mithril/mixin_helper'
 
 require 'mithril/mixin'

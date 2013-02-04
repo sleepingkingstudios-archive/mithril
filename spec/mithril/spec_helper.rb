@@ -9,7 +9,3 @@ end # config
 
 #=# Require Factories, Custom Matchers, &c #=#
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
-
-module Mithril
-  module Mock; end
-end # module Mithril

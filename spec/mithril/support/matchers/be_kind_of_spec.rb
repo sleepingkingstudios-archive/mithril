@@ -1,6 +1,6 @@
 # spec/matchers/be_kind_of_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 
 describe RSpec::Matchers::BuiltIn::BeAKindOf do
   let :custom_module do Module.new; end

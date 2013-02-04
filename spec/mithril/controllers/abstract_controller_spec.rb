@@ -1,6 +1,6 @@
 # spec/controllers/mithril/abstract_controller_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 require 'mithril/controllers/_text_controller_helper'
 
 require 'mithril/controllers/abstract_controller'

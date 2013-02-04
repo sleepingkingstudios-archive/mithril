@@ -1,6 +1,6 @@
 # spec/mithril/parsers/simple_parser_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 
 require 'mithril/controllers/mixins/actions_base'
 require 'mithril/parsers/simple_parser'

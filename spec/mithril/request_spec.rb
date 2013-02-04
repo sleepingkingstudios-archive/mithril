@@ -1,6 +1,6 @@
 # spec/mithril/request_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 
 require 'mithril/request'
 

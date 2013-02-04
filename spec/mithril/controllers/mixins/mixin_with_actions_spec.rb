@@ -1,6 +1,6 @@
 # spec/mithril/controllers/mixins/action_mixin_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 require 'mithril/mixin_helper'
 
 require 'mithril/controllers/mixins/mixin_with_actions'

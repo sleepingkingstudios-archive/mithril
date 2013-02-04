@@ -1,6 +1,6 @@
 # spec/matchers/respond_to_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 
 describe RSpec::Matchers::BuiltIn::RespondTo do
   let :described_class do

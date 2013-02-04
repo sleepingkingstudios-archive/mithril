@@ -1,6 +1,6 @@
 # spec/matchers/construct_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 
 describe "construct matcher" do
   let :class_with_no_arguments do Class.new; end

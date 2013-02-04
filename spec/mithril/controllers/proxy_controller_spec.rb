@@ -1,6 +1,6 @@
 # spec/mithril/controllers/proxy_controller_spec.rb
 
-require 'spec_helper'
+require 'mithril/spec_helper'
 require 'mithril/controllers/proxy_controller_helper'
 
 require 'mithril/controllers/proxy_controller'
