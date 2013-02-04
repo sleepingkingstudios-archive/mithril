@@ -85,7 +85,7 @@ module Mithril::Controllers
     
     # Default output when a command cannot be found for a given input.
     # @param [Object] input The input that failed to match a command.
-    # @returns [Object]
+    # @return [Object]
     def command_missing(input)
       "I'm sorry, I don't know how to \"#{input.to_s}\". Please try another" +
         " command, or enter \"help\" for assistance."

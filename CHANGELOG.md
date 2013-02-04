@@ -1,5 +1,8 @@
 ## Development Versions
 
+#### Version 0.2.0
+  * Implemented ProxyController
+
 #### Version 0.1.2
   * Added HelpActions mixin
 
