@@ -26,6 +26,13 @@ shared_examples_for Mithril::Mixin do
     mod
   end # let
   
+  let :module_instance_method do FactoryGirl.generate :action_key; end
+  let :module_without_class_methods do
+    mod = Module.new
+    mod.send :define_method, module_instance_method do; end
+    mod
+  end # let
+  
   context "with a direct mixin" do
     before :each do described_class.send :mixin, ancestor_module; end
     
@@ -49,6 +56,14 @@ shared_examples_for Mithril::Mixin do
     describe "class method are mixed in" do
       specify { expect(described_class).to respond_to ancestor_class_method }
       specify { expect(described_class).to respond_to parent_class_method }
+    end # describe
+  end # context
+  
+  context 'with a module without class methods' do
+    before :each do described_class.send :mixin, module_without_class_methods; end
+    
+    describe "instance methods are mixed in" do
+      specify { expect(instance).to respond_to module_instance_method }
     end # describe
   end # context
 end # shared examples

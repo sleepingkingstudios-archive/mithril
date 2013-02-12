@@ -25,7 +25,7 @@ module Mithril
     
       self.mixins.each do |mixin|
         if mixin.const_defined? :ClassMethods
-          extend mixin::ClassMethods
+          extend mixin.const_get :ClassMethods
         end # if
       end # each
     end # method mixin
