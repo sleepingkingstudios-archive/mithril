@@ -20,6 +20,7 @@ shared_examples_for Mithril::Controllers::ProxyController do
   before :each do
     proxy.define_action proxy_action do |session, arguments|; "proxy command"; end
     child.define_action child_action do |session, arguments|; "child command"; end
+    child.define_action :"" do |session, arguments|; "empty command #{arguments.join(" ")}"; end
   end # before each
   
   let :session   do {}; end
@@ -94,9 +95,14 @@ shared_examples_for Mithril::Controllers::ProxyController do
       specify { expect(proxy_instance.invoke_command proxy_command).to eq "proxy command" }
       
       describe "empty actions" do
+        let :text do "with arguments"; end
+        
         before :each do child_instance.stub :allow_empty_action? do true; end; end
         
-        specify { expect(proxy_instance.allow_empty_action?).to be true}
+        specify { expect(proxy_instance.can_invoke? text).to be true }
+        specify { expect(proxy_instance.can_invoke_on_self? text).to be false }
+        
+        specify { expect(proxy_instance.invoke_command text).to eq "empty command with arguments" }
       end # describe
     end # context
     
@@ -114,9 +120,14 @@ shared_examples_for Mithril::Controllers::ProxyController do
       specify { expect(proxy_instance.invoke_command proxy_command).to match /don't know how/i }
       
       describe "empty actions" do
+        let :text do "with arguments"; end
+        
         before :each do child_instance.stub :allow_empty_action? do true; end; end
         
-        specify { expect(proxy_instance.allow_empty_action?).to be true}
+        specify { expect(proxy_instance.can_invoke? text).to be true }
+        specify { expect(proxy_instance.can_invoke_on_self? text).to be false }
+        
+        specify { expect(proxy_instance.invoke_command text).to eq "empty command with arguments" }
       end # describe
     end # context
   end # context

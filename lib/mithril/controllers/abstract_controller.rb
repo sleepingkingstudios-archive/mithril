@@ -30,8 +30,13 @@ module Mithril::Controllers
       @request = request
     end # constructor
     
+    # Internal helper for identifying a class in a log statement.
     def class_name
-      (self.class.name || "").split("::").last
+      klass = self.class
+      while klass.name.nil?
+        klass = klass.superclass
+      end # while
+      klass.name.split("::").last
     end # accessor class_name
     private :class_name
     
