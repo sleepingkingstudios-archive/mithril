@@ -280,6 +280,21 @@ shared_examples_for Mithril::Controllers::Mixins::CallbackHelpers do
         end # each
       end # specify
     end # context
+    
+    context 'with valid options and an empty command' do
+      let :callback_command do ""; end
+      
+      specify { expect { instance.serialize_callbacks callbacks }.not_to raise_error }
+      
+      specify 'formats the callbacks for serialization' do
+        hsh = instance.serialize_callbacks callbacks
+        
+        expect(hsh.keys).to eq [""]
+        
+        controller = callback_controller.to_s.split("::").last
+        expect(hsh[callback_command]).to eq "#{controller},#{callback_action}"
+      end # specify
+    end # context
   end # describe
   
   describe :deserialize_callbacks do
@@ -383,6 +398,22 @@ shared_examples_for Mithril::Controllers::Mixins::CallbackHelpers do
           expect(hsh[command][:controller]).to eq callback_controller
           expect(hsh[command][:action]).to eq action
         end # each
+      end # specify
+    end # context
+    
+    context 'with a valid callback and empty command' do
+      let :callback_command do ""; end
+      
+      specify { expect { instance.deserialize_callbacks callbacks }.not_to raise_error }
+      
+      specify 'reconstructs the serialized callbacks' do
+        hsh = instance.deserialize_callbacks callbacks
+        
+        expect(hsh.keys).to eq [:""]
+        
+        controller = callback_controller.to_s.split("::").last
+        expect(hsh[callback_command.intern][:controller]).to eq callback_controller
+        expect(hsh[callback_command.intern][:action]).to eq callback_action
       end # specify
     end # context
   end # describe

@@ -196,7 +196,7 @@ module Mithril::Controllers::Mixins
       callbacks, exception = {}, nil
       params.each do |key, value|
         callback = key.to_s
-        if key.nil? || callback.empty?
+        if key.nil?
           exception ||= CallbackError.new "malformed callbacks hash"
           (exception.errors[callback] ||= []) << "expected callback not to be nil"
           next

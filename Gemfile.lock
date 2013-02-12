@@ -7,8 +7,8 @@ GIT
 PATH
   remote: .
   specs:
-    mithril (0.3.0)
-    mithril-specs (0.3.0)
+    mithril (0.3.1)
+    mithril-specs (0.3.1)
 
 GEM
   remote: https://rubygems.org/
