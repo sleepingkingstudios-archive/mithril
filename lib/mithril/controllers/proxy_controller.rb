@@ -14,6 +14,16 @@ module Mithril::Controllers
       nil # override this in sub-classes
     end # method proxy
     
+    def allow_empty_action?
+      if proxy.nil?
+        super
+      elsif self.allow_own_actions_while_proxied?
+        super || proxy.allow_empty_action?
+      else
+        proxy.allow_empty_action?
+      end # if-elsif-else
+    end # method allow_empty_action
+    
     # If evalutes to true, then any actions defined on this controller will be
     # available even when a proxy is present. Defaults to true, but can be
     # overriden in subclasses.

@@ -17,8 +17,12 @@ module Mithril::Controllers
       @callbacks = self.deserialize_callbacks request.session[callback_key]
     end # method initialize
     
+    def allow_empty_action?
+      super || callbacks.has_key?(:"")
+    end # method allow_empty_action
+    
     def callbacks
-      @callbacks
+      @callbacks ||= {}
     end # method callbacks
     
     def actions(allow_private = false)

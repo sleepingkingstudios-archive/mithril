@@ -11,10 +11,14 @@ shared_examples_for Mithril::Controllers::CallbackController do
   it_behaves_like Mithril::Controllers::Mixins::CallbackHelpers
   it_behaves_like Mithril::Controllers::Mixins::HelpActions
   
+  describe :allow_empty_actions? do
+    specify { expect(instance.allow_empty_action?).to be false }
+  end # describe
+  
   describe :callbacks do
     specify { expect(instance).to respond_to(:callbacks).with(0).arguments }
     
-    specify { expect(instance.callbacks).to be nil }
+    specify { expect(instance.callbacks).to eq Hash.new }
   end # describe
   
   context 'with callbacks defined in the session' do
@@ -54,5 +58,11 @@ shared_examples_for Mithril::Controllers::CallbackController do
     
     specify { expect(instance.invoke_action command_key, arguments).to eq arguments }
     specify { expect(instance.invoke_command text).to eq arguments }
+    
+    context 'with a callback with an empty command' do
+      let :command do ""; end
+      
+      specify { expect(instance.allow_empty_action?).to be true }
+    end # context
   end # context
 end # shared examples

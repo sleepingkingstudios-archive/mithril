@@ -92,20 +92,32 @@ shared_examples_for Mithril::Controllers::ProxyController do
       specify { expect(proxy_instance.can_invoke? proxy_command).to be true }
 
       specify { expect(proxy_instance.invoke_command proxy_command).to eq "proxy command" }
+      
+      describe "empty actions" do
+        before :each do child_instance.stub :allow_empty_action? do true; end; end
+        
+        specify { expect(proxy_instance.allow_empty_action?).to be true}
+      end # describe
     end # context
-
-    context "allowing own actions" do
+    
+    context "disallowing own actions" do
       before :each do proxy_instance.stub :allow_own_actions_while_proxied? do false; end; end
 
       specify { expect(proxy_instance.allow_own_actions_while_proxied?).to be false }
-
+      
       specify { expect(proxy_instance.commands).not_to include proxy_command }
-
+      
       specify { expect(proxy_instance).not_to have_command proxy_command }
-
+      
       specify { expect(proxy_instance.can_invoke? proxy_command).to be false }
-
+      
       specify { expect(proxy_instance.invoke_command proxy_command).to match /don't know how/i }
+      
+      describe "empty actions" do
+        before :each do child_instance.stub :allow_empty_action? do true; end; end
+        
+        specify { expect(proxy_instance.allow_empty_action?).to be true}
+      end # describe
     end # context
   end # context
 end # shared examples
