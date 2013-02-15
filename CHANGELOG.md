@@ -1,5 +1,21 @@
 ## Development Versions
 
+#### Version 0.4.0
+  * Implemented ContextualParser
+
+#### Version 0.3.5
+  * Implemented ActionError
+
+#### Version 0.3.2 to 0.3.4
+  * Updated ProxyController and CallbackController to allow empty command as a
+    callback and through a proxy
+
+#### Version 0.3.1
+  * Fixed issue with Mixin inheritance
+
+#### Version 0.3.0
+  * Implemented CallbackController
+
 #### Version 0.2.0
   * Implemented ProxyController
 

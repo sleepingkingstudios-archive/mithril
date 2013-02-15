@@ -59,6 +59,9 @@ shared_examples_for Mithril::Controllers::Mixins::HelpActions do
       action_keys.each do |key|
         described_class.send :define_action, key do |session, arguments|; end
       end # each
+      
+      
+      described_class.send(:undef_method, :has_command?) if instance.respond_to? :has_command
     end # before each
     
     describe "help action" do
@@ -69,7 +72,7 @@ shared_examples_for Mithril::Controllers::Mixins::HelpActions do
         end # each
       end # specify
       
-      specify "invokes the command with help" do
+      specify "invokes the action with help" do
         session = instance.request ? (instance.request.session || {}) : {}
         action_keys.each do |key|
           command = key.to_s.gsub('_',' ')
