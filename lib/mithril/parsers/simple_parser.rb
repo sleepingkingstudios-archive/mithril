@@ -1,9 +1,12 @@
 # lib/mithril/parsers/simple_parser.rb
 
 require 'mithril/parsers'
+require 'mithril/parsers/parser_helpers'
 
 module Mithril::Parsers
   class SimpleParser
+    include ParserHelpers
+    
     def initialize(actions)
       @actions = actions
     end # method initialize
@@ -31,7 +34,7 @@ module Mithril::Parsers
       args = []
       
       while 0 < words.count
-        key = words.join('_').intern
+        key = words.join('_').downcase.intern
         
         return key, args if @actions.has_action? key
         
@@ -40,18 +43,5 @@ module Mithril::Parsers
       
       return nil, args
     end # method parse_command
-    
-  private
-    # @!visibility public
-    def preprocess_input(text)
-      text.downcase.
-        gsub(/[\"?!\-',.:\(\)\[\]\;]/, ' ').
-        gsub(/(\s+)/, ' ').strip
-    end # method preprocess_input
-    
-    # @!visibility public
-    def wordify(text)
-      text.split(/\s+/)
-    end # method wordify
   end # class
 end # module

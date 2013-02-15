@@ -1,52 +1,22 @@
 # spec/mithril/parsers/simple_parser_spec.rb
 
 require 'mithril/spec_helper'
+require 'mithril/parsers/parser_helpers_helper'
 
 require 'mithril/controllers/mixins/actions_base'
 require 'mithril/parsers/simple_parser'
 
 describe Mithril::Parsers::SimpleParser do
+  describe :initialize do
+    specify { expect(described_class).to construct.with(1).arguments }
+  end # describe
+  
   let :actions_source do
     Object.new.tap do |obj| obj.stub :has_action? do false; end; end
   end # let
   let :instance do described_class.new actions_source; end
   
-  describe :initialize do
-    specify { expect(described_class).to construct.with(1).arguments }
-  end # describe
-  
-  describe :preprocess_input do
-    specify { expect(instance.respond_to? :preprocess_input, true).to be true }
-    
-    specify "downcases input" do
-      clean, dirty = "lorem ipsum", "Lorem IPSuM"
-      expect(instance.send :preprocess_input, dirty).to eq clean
-    end # specify
-    
-    specify "strips leading and trailing whitespace" do
-      clean, dirty = "lorem ipsum", "\n\tlorem ipsum    \r\r"
-      expect(instance.send :preprocess_input, dirty).to eq clean
-    end # specify
-    
-    specify "normalises internal whitespace" do
-      clean, dirty = "lorem ipsum dolor sit amet", "lorem ipsum  \rdolor\n\tsit amet"
-      expect(instance.send :preprocess_input, dirty).to eq clean
-    end # specify
-    
-    specify "converts puntuation to whitespace" do
-      clean, dirty = "lorem ipsum dolor sit amet", "lorem?-\"ipsum' :: (dolor![sit]), amet;"
-      expect(instance.send :preprocess_input, dirty).to eq clean
-    end # specify
-  end # describe
-  
-  describe :wordify do
-    specify { expect(instance.respond_to? :wordify, true).to be true }
-    
-    specify "splits input on whitespace" do
-      output = %w(second star to the right and straight on till morning)
-      expect(instance.send :wordify, output.join(" ")).to eq output
-    end # specify
-  end # describe
+  it_behaves_like Mithril::Parsers::ParserHelpers
   
   describe :parse_command do
     specify { expect(instance).to respond_to(:parse_command).

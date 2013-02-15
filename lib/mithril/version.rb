@@ -1,5 +1,5 @@
 # lib/mithril/version.rb
 
 module Mithril
-  VERSION = '0.3.5'
+  VERSION = '0.4.0'
 end # module Mithril
