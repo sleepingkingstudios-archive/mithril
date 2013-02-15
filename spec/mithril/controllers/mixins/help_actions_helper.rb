@@ -60,8 +60,7 @@ shared_examples_for Mithril::Controllers::Mixins::HelpActions do
         described_class.send :define_action, key do |session, arguments|; end
       end # each
       
-      
-      described_class.send(:undef_method, :has_command?) if instance.respond_to? :has_command
+      described_class.send(:undef_method, :has_command?) if instance.respond_to? :has_command?
     end # before each
     
     describe "help action" do
