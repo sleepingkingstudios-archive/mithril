@@ -1,7 +1,7 @@
 # lib/mithril/controllers/abstract_controller.rb
 
 require 'mithril/controllers'
-require 'mithril/controllers/mixins/actions_base'
+require 'mithril/controllers/mixins/commands_base'
 require 'mithril/controllers/mixins/mixin_with_actions'
 require 'mithril/parsers/simple_parser'
 
@@ -17,7 +17,7 @@ module Mithril::Controllers
   class AbstractController
     extend Mithril::Controllers::Mixins::MixinWithActions
     
-    mixin Mithril::Controllers::Mixins::ActionsBase
+    mixin Mithril::Controllers::Mixins::CommandsBase
     
     # @param [Mithril::Request] request Request object containing the volatile
     #   state information needed to build the controller and execute commands.
@@ -59,21 +59,6 @@ module Mithril::Controllers
     def parse_command(input)
       self.parser.parse_command input
     end # method parse_command
-    
-    # @return [Array] All commands available to this controller.
-    def commands
-      actions.keys.map do |key| key.to_s.gsub '_', ' '; end
-    end # method commands
-    
-    # @param [String, Symbol] text The command to check. The parameter is
-    #   converted to a String, and must exactly match a command available
-    #   to the controller.
-    # @return [Boolean] True if this controller has the specified command.
-    #   Otherwise false.
-    # @see #can_invoke?
-    def has_command?(text)
-      commands.include? text.to_s
-    end # method has_command?
     
     # @example Using :has_command? and :can_invoke?
     #   # With an action "do" defined

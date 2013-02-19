@@ -65,12 +65,25 @@ module Mithril::Controllers::Mixins
     # @return [Mithril::Request]
     attr_reader :request
     
+    # As ClassMethods#define_action, but the action is only available on the
+    # current instance.
+    # 
+    # @see ClassMethods#define_action
+    def define_singleton_action(key, params = {}, &block)
+      key = key.to_s.downcase.gsub(/\s+|\-+/,'_').intern
+      
+      define_singleton_method :"action_#{key}", &block
+      
+      @singleton_actions ||= {}
+      @singleton_actions[key] = params
+    end # method define_singleton_action
+    
     # Lists the actions available to the current controller.
     # 
     # @param [Boolean] allow_private If true, will include private actions.
     # @return [Hash] The actions available to this controller.
     def actions(allow_private = false)
-      actions = {}
+      actions = (@singleton_actions || {})
       
       actions.update(self.class.superclass.actions(allow_private)) if (klass = self.class.superclass).respond_to? :actions
       
