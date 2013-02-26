@@ -13,7 +13,7 @@ module RSpec::Matchers::BuiltIn
       case
       when expected.nil?
         @actual.nil?
-      when expected.respond_to?(:each)
+      when expected.is_a?(Enumerable)
         expected.reduce(false) { |memo, obj| memo || match_type?(obj) }
       else
         @actual.kind_of? expected
