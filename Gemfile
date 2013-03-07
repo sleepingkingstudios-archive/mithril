@@ -2,10 +2,8 @@
 
 source 'https://rubygems.org'
 
-gemspec :name => 'mithril'
-gemspec :name => 'mithril-specs'
+path '../rspec-sleeping_king_studios' do
+  gem 'rspec-sleeping_king_studios', :group => :test
+end # path
 
-group :test do
-  gem 'rspec', '~> 2.13'
-  gem 'factory_girl', '~> 4.2'
-end # group test
+gemspec :name => 'mithril'

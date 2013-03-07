@@ -3,3 +3,4 @@
 
 # compiled gem file
 *.gem
+Gemfile.lock
